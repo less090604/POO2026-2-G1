@@ -555,7 +555,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.edu.upeu.sysventas.enums.TipoProducto;
 
 @Data
 @Builder
@@ -563,32 +562,32 @@ import pe.edu.upeu.sysventas.enums.TipoProducto;
 @AllArgsConstructor
 public class Producto {
 
-    private Long idProducto;
-    @NotBlank(message = "El nombre del producto es obligatorio")
-    private String nombre;
-    @NotNull(message = "La Tipo Producto es obligatoria")
-    private TipoProducto tipoProducto;
-    @NotNull(message = "El precio del producto es obligatorio")
-    @Positive(message = "El precio del producto debe ser positivo")
-    private Double pu;
-    @NotNull(message = "El precio anterior del producto es obligatorio")
-    @PositiveOrZero(message = "El precio anterior del producto debe ser positivo o cero")
-    private Double puold;
-    @NotNull(message = "La utilidad es obligatoria")
-    @Positive(message = "La utilidad debe ser positiva o cero")
-    private Double utilidad;
-    @NotNull(message = "El stock del producto es obligatorio")
-    @PositiveOrZero(message = "El stock del producto debe ser positivo")
-    private Double stock;
-    @NotNull(message = "El stock anterior del producto es obligatorio")
-    @PositiveOrZero(message = "El stock anterior del producto debe ser positivo")
-    private Double stockold;
-    //@NotNull(message = "La categoria del producto es obligatoria")
-    private Categoria idCategoria;
-    @NotNull(message = "La marca del producto es obligatoria")
-    private Marca idMarca;
-    //@NotNull(message = "La unidad de medida del producto es obligatoria")
-    private UnidMedida idUnidad;
+   private Long idProducto;
+   @NotBlank(message = "El nombre del producto es obligatorio")
+   private String nombre;
+   @NotNull(message = "La Tipo Producto es obligatoria")
+   private TipoProducto tipoProducto;
+   @NotNull(message = "El precio del producto es obligatorio")
+   @Positive(message = "El precio del producto debe ser positivo")
+   private Double pu;
+   @NotNull(message = "El precio anterior del producto es obligatorio")
+   @PositiveOrZero(message = "El precio anterior del producto debe ser positivo o cero")
+   private Double puold;
+   @NotNull(message = "La utilidad es obligatoria")
+   @Positive(message = "La utilidad debe ser positiva o cero")
+   private Double utilidad;
+   @NotNull(message = "El stock del producto es obligatorio")
+   @PositiveOrZero(message = "El stock del producto debe ser positivo")
+   private Double stock;
+   @NotNull(message = "El stock anterior del producto es obligatorio")
+   @PositiveOrZero(message = "El stock anterior del producto debe ser positivo")
+   private Double stockold;
+   //@NotNull(message = "La categoria del producto es obligatoria")
+   private Categoria idCategoria;
+   @NotNull(message = "La marca del producto es obligatoria")
+   private Marca idMarca;
+   //@NotNull(message = "La unidad de medida del producto es obligatoria")
+   private UnidMedida idUnidad;
 }
 ```
 
@@ -728,22 +727,23 @@ package pe.edu.upeu.sysventas.repository;
 
 import pe.edu.upeu.sysventas.model.Categoria;
 
-public class CategoriaRepository extends AbstractJpaRepository<Categoria, Long>{
-    private long sequence = 1;
-    @Override
-    protected Long getId(Categoria entity) {
-        return entity.getIdCategoria();
-    }
+public class CategoriaRepository {
+   private long sequence = 1;
 
-    @Override
-    protected void setId(Categoria entity, Long id) {
-        entity.setIdCategoria(id);
-    }
+   @Override
+   protected Long getId(Categoria entity) {
+      return entity.getIdCategoria();
+   }
 
-    @Override
-    protected Long generateId() {
-        return sequence++;
-    }
+   @Override
+   protected void setId(Categoria entity, Long id) {
+      entity.setIdCategoria(id);
+   }
+
+   @Override
+   protected Long generateId() {
+      return sequence++;
+   }
 }
 ```
 
@@ -754,32 +754,33 @@ package pe.edu.upeu.sysventas.repository;
 
 import pe.edu.upeu.sysventas.model.Marca;
 
-public class MarcaRepository extends AbstractJpaRepository<Marca, Long>{
-    private long sequence = 1;
-    @Override
-    protected Long getId(Marca entity) {
-        return entity.getIdMarca();
-    }
+public class MarcaRepository {
+   private long sequence = 1;
 
-    @Override
-    protected void setId(Marca entity, Long id) {
-        entity.setIdMarca(id);
-    }
+   @Override
+   protected Long getId(Marca entity) {
+      return entity.getIdMarca();
+   }
 
-    @Override
-    protected Long generateId() {
-        return sequence++;
-    }
+   @Override
+   protected void setId(Marca entity, Long id) {
+      entity.setIdMarca(id);
+   }
 
-    public void seedData() {
-        if (findAll().isEmpty()) {
-            save(new Marca(generateId(), "Samsung"));
-            save(new Marca(generateId(),"LG"));
-            save(new Marca(generateId(),"Sony"));
-            save(new Marca(generateId(),"HP"));
-            save(new Marca(generateId(),"Lenovo"));
-        }
-    }
+   @Override
+   protected Long generateId() {
+      return sequence++;
+   }
+
+   public void seedData() {
+      if (findAll().isEmpty()) {
+         save(new Marca(generateId(), "Samsung"));
+         save(new Marca(generateId(), "LG"));
+         save(new Marca(generateId(), "Sony"));
+         save(new Marca(generateId(), "HP"));
+         save(new Marca(generateId(), "Lenovo"));
+      }
+   }
 }
 ```
 
@@ -790,23 +791,23 @@ package pe.edu.upeu.sysventas.repository;
 
 import pe.edu.upeu.sysventas.model.Producto;
 
-public class ProductoRepository extends AbstractJpaRepository<Producto, Long>{
-    private long sequence = 1;
+public class ProductoRepository {
+   private long sequence = 1;
 
-    @Override
-    protected Long getId(Producto entity) {
-        return entity.getIdProducto();
-    }
+   @Override
+   protected Long getId(Producto entity) {
+      return entity.getIdProducto();
+   }
 
-    @Override
-    protected void setId(Producto entity, Long id) {
-        entity.setIdProducto(id);
-    }
+   @Override
+   protected void setId(Producto entity, Long id) {
+      entity.setIdProducto(id);
+   }
 
-    @Override
-    protected Long generateId() {
-        return sequence++;
-    }
+   @Override
+   protected Long generateId() {
+      return sequence++;
+   }
 
 
 }
@@ -819,22 +820,23 @@ package pe.edu.upeu.sysventas.repository;
 
 import pe.edu.upeu.sysventas.model.UnidMedida;
 
-public class UnidadMedidaRepository extends AbstractJpaRepository<UnidMedida, Long>{
-    private long sequence = 1;
-    @Override
-    protected Long getId(UnidMedida entity) {
-        return entity.getIdUnidad();
-    }
+public class UnidadMedidaRepository {
+   private long sequence = 1;
 
-    @Override
-    protected void setId(UnidMedida entity, Long id) {
-        entity.setIdUnidad(id);
-    }
+   @Override
+   protected Long getId(UnidMedida entity) {
+      return entity.getIdUnidad();
+   }
 
-    @Override
-    protected Long generateId() {
-        return sequence++;
-    }
+   @Override
+   protected void setId(UnidMedida entity, Long id) {
+      entity.setIdUnidad(id);
+   }
+
+   @Override
+   protected Long generateId() {
+      return sequence++;
+   }
 }
 ```
 
@@ -1054,7 +1056,6 @@ public interface IProductoService extends ICrudGenericoService<Producto, Long>{
 package pe.edu.upeu.sysventas.service.impl;
 
 import pe.edu.upeu.sysventas.dto.ComboBoxOption;
-import pe.edu.upeu.sysventas.enums.TipoProducto;
 import pe.edu.upeu.sysventas.model.Marca;
 import pe.edu.upeu.sysventas.model.Producto;
 import pe.edu.upeu.sysventas.repository.ICrudGenericoRepository;
@@ -1063,30 +1064,31 @@ import pe.edu.upeu.sysventas.service.IProductoService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class ProductoServiceImp extends CrudGenericoServiceImp<Producto, Long> implements IProductoService {
 
-    private final ProductoRepository productoRepository;
-    public ProductoServiceImp(ProductoRepository productoRepository) {
-        this.productoRepository = productoRepository;
-    }
-    @Override
-    protected ICrudGenericoRepository<Producto, Long> getRepo() {
-        return productoRepository;
-    }
+   private final ProductoRepository productoRepository;
 
-    @Override
-    public List<ComboBoxOption> listarTipoProducto() {
-        List<ComboBoxOption> listar = new ArrayList<>();
-        for (TipoProducto tp : TipoProducto.values()) {
-            ComboBoxOption cb = new ComboBoxOption();
-            cb.setKey(String.valueOf(tp.name()));
-            cb.setValue(tp.getDescripcion());
-            listar.add(cb);
-        }
-        return listar;
-    }
+   public ProductoServiceImp(ProductoRepository productoRepository) {
+      this.productoRepository = productoRepository;
+   }
+
+   @Override
+   protected ICrudGenericoRepository<Producto, Long> getRepo() {
+      return productoRepository;
+   }
+
+   @Override
+   public List<ComboBoxOption> listarTipoProducto() {
+      List<ComboBoxOption> listar = new ArrayList<>();
+      for (TipoProducto tp : TipoProducto.values()) {
+         ComboBoxOption cb = new ComboBoxOption();
+         cb.setKey(String.valueOf(tp.name()));
+         cb.setValue(tp.getDescripcion());
+         listar.add(cb);
+      }
+      return listar;
+   }
 }
 ```
 
@@ -1737,7 +1739,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pe.edu.upeu.sysventas.components.*;
 import pe.edu.upeu.sysventas.dto.ComboBoxOption;
-import pe.edu.upeu.sysventas.enums.TipoProducto;
 import pe.edu.upeu.sysventas.model.Producto;
 import pe.edu.upeu.sysventas.service.ICategoriaService;
 import pe.edu.upeu.sysventas.service.IMarcaService;
@@ -1752,271 +1753,290 @@ import java.util.stream.Collectors;
 
 public class ProductoController {
 
-    @FXML TextField txtNombreProducto, txtPUnit,
-            txtPUnitOld, txtUtilidad, txtStock, txtStockOld, txtFiltroDato;
-    @FXML ComboBox<ComboBoxOption> cbxTipoProducto;
-    @FXML ComboBox<ComboBoxOption> cbxMarca;
-    @FXML ComboBox<ComboBoxOption> cbxCategoria;
-    @FXML ComboBox<ComboBoxOption> cbxUnidMedida;
+   @FXML
+   TextField txtNombreProducto, txtPUnit,
+           txtPUnitOld, txtUtilidad, txtStock, txtStockOld, txtFiltroDato;
+   @FXML
+   ComboBox<ComboBoxOption> cbxTipoProducto;
+   @FXML
+   ComboBox<ComboBoxOption> cbxMarca;
+   @FXML
+   ComboBox<ComboBoxOption> cbxCategoria;
+   @FXML
+   ComboBox<ComboBoxOption> cbxUnidMedida;
 
-    @FXML private TableView<Producto> tableView;
+   @FXML
+   private TableView<Producto> tableView;
 
-    @FXML Label lbnMsg, idPrueba;
-    @FXML private AnchorPane miContenedor;
-    Stage stage;
+   @FXML
+   Label lbnMsg, idPrueba;
+   @FXML
+   private AnchorPane miContenedor;
+   Stage stage;
 
-    private final IMarcaService ms;
-    private final ICategoriaService cs;
-    private final IProductoService ps;
-    private final IUnidadMedidaService ums;
+   private final IMarcaService ms;
+   private final ICategoriaService cs;
+   private final IProductoService ps;
+   private final IUnidadMedidaService ums;
 
-    public ProductoController(IMarcaService ms, ICategoriaService cs,
-                              IProductoService ps, IUnidadMedidaService ums) {
-        this.ms = ms;
-        this.cs = cs;
-        this.ps = ps;
-        this.ums = ums;
-    }
+   public ProductoController(IMarcaService ms, ICategoriaService cs,
+                             IProductoService ps, IUnidadMedidaService ums) {
+      this.ms = ms;
+      this.cs = cs;
+      this.ps = ps;
+      this.ums = ums;
+   }
 
-    private Validator validator;
-    ObservableList<Producto> listarProducto;
-    Producto formulario;
-    Long idProductoCE = 0L;
+   private Validator validator;
+   ObservableList<Producto> listarProducto;
+   Producto formulario;
+   Long idProductoCE = 0L;
 
-    private final ToltipCustom ttc=new ToltipCustom();
+   private final ToltipCustom ttc = new ToltipCustom();
 
 
-
-    @FXML
-    public void initialize() {
+   @FXML
+   public void initialize() {
         /*Platform.runLater(() -> {
             stage = (Stage) miContenedor.getScene().getWindow();
             System.out.println("El título del stage es: " + stage.getTitle());
         });*/
-        miContenedor.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if(newScene != null){
-                stage = (Stage) newScene.getWindow();
-                System.out.println("El título del stage es: "+ stage.getTitle()
-                );
-            }
-        });
+      miContenedor.sceneProperty().addListener((obs, oldScene, newScene) -> {
+         if (newScene != null) {
+            stage = (Stage) newScene.getWindow();
+            System.out.println("El título del stage es: " + stage.getTitle()
+            );
+         }
+      });
 
-        cbxTipoProducto.getItems().addAll(ps.listarTipoProducto());
-        new ComboBoxAutoComplete<>(cbxTipoProducto);
+      cbxTipoProducto.getItems().addAll(ps.listarTipoProducto());
+      new ComboBoxAutoComplete<>(cbxTipoProducto);
 
-        cbxMarca.getItems().addAll(ms.listarCombobox());
-        new ComboBoxAutoComplete<>(cbxMarca);
+      cbxMarca.getItems().addAll(ms.listarCombobox());
+      new ComboBoxAutoComplete<>(cbxMarca);
 
-        cbxCategoria.getItems().addAll(cs.listarCombobox());
-        new ComboBoxAutoComplete<>(cbxCategoria);
+      cbxCategoria.getItems().addAll(cs.listarCombobox());
+      new ComboBoxAutoComplete<>(cbxCategoria);
 
-        cbxUnidMedida.getItems().addAll(ums.listarCombobox());
-        new ComboBoxAutoComplete<>(cbxUnidMedida);
+      cbxUnidMedida.getItems().addAll(ums.listarCombobox());
+      new ComboBoxAutoComplete<>(cbxUnidMedida);
 
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+      ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+      validator = factory.getValidator();
 
-        TableViewHelper<Producto> tableViewHelper = new TableViewHelper<>();
+      TableViewHelper<Producto> tableViewHelper = new TableViewHelper<>();
 
-        LinkedHashMap<String, ColumnInfo> columns = new LinkedHashMap<>();
-        columns.put("ID Pro.", new ColumnInfo("idProducto", 60.0));
-        columns.put("Tipo Producto", new ColumnInfo("tipoProducto", 150.0));
-        columns.put("Nombre Producto", new ColumnInfo("nombre", 200.0));
-        columns.put("P. Unitario", new ColumnInfo("pu", 150.0));
-        columns.put("Utilidad", new ColumnInfo("utilidad", 100.0));
-        columns.put("Marca", new ColumnInfo("idMarca.nombre", 200.0));
-        columns.put("Categoria", new ColumnInfo("idCategoria.nombre", 200.0));
+      LinkedHashMap<String, ColumnInfo> columns = new LinkedHashMap<>();
+      columns.put("ID Pro.", new ColumnInfo("idProducto", 60.0));
+      columns.put("Tipo Producto", new ColumnInfo("tipoProducto", 150.0));
+      columns.put("Nombre Producto", new ColumnInfo("nombre", 200.0));
+      columns.put("P. Unitario", new ColumnInfo("pu", 150.0));
+      columns.put("Utilidad", new ColumnInfo("utilidad", 100.0));
+      columns.put("Marca", new ColumnInfo("idMarca.nombre", 200.0));
+      columns.put("Categoria", new ColumnInfo("idCategoria.nombre", 200.0));
 
-        Consumer<Producto> updateAction = producto -> editForm(producto);
-        Consumer<Producto> deleteAction = producto -> {
-            ps.delete(producto.getIdProducto());
-            double w = stage.getWidth() / 1.5, h = stage.getHeight() / 2;
-            Toast.showToast(stage, "Se eliminó correctamente!!", 2000, w, h);
-            listar();
-        };
+      Consumer<Producto> updateAction = producto -> editForm(producto);
+      Consumer<Producto> deleteAction = producto -> {
+         ps.delete(producto.getIdProducto());
+         double w = stage.getWidth() / 1.5, h = stage.getHeight() / 2;
+         Toast.showToast(stage, "Se eliminó correctamente!!", 2000, w, h);
+         listar();
+      };
 
-        tableViewHelper.addColumnsInOrderWithSize(tableView, columns, updateAction, deleteAction);
-        tableView.setTableMenuButtonVisible(true);
-        listar();
-    }
-    public void setStage(Stage stage) {
-        this.stage = stage;
-        System.out.println("Llego"+stage.getTitle());
-    }
-    public void listar() {
-        try {
-            tableView.getItems().clear();
-            listarProducto = FXCollections.observableArrayList(ps.findAll());
-            tableView.getItems().addAll(listarProducto);
-            txtFiltroDato.textProperty().addListener((obs, o, n) -> filtrarProductos(n));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+      tableViewHelper.addColumnsInOrderWithSize(tableView, columns, updateAction, deleteAction);
+      tableView.setTableMenuButtonVisible(true);
+      listar();
+   }
 
-    private void filtrarProductos(String filtro) {
-        if (filtro == null || filtro.isEmpty()) {
-            tableView.getItems().setAll(listarProducto);
-        } else {
-            String f = filtro.toLowerCase();
-            List<Producto> filtrados = listarProducto.stream()
-                .filter(p -> p.getNombre().toLowerCase().contains(f)
-                    || String.valueOf(p.getPu()).contains(f)
-                    || String.valueOf(p.getUtilidad()).contains(f)
-                    || p.getIdMarca().getNombre().toLowerCase().contains(f)
-                    || p.getIdCategoria().getNombre().toLowerCase().contains(f))
-                .collect(Collectors.toList());
-            tableView.getItems().setAll(filtrados);
-        }
-    }
+   public void setStage(Stage stage) {
+      this.stage = stage;
+      System.out.println("Llego" + stage.getTitle());
+   }
 
-    @FXML
-    public void validarFormulario() {
-        formulario = new Producto();
-        formulario.setNombre(txtNombreProducto.getText());
-        formulario.setPu(parseDoubleSafe(txtPUnit.getText()));
-        formulario.setPuold(parseDoubleSafe(txtPUnitOld.getText()));
-        formulario.setUtilidad(parseDoubleSafe(txtUtilidad.getText()));
-        formulario.setStock(parseDoubleSafe(txtStock.getText()));
-        formulario.setStockold(parseDoubleSafe(txtStockOld.getText()));
+   public void listar() {
+      try {
+         tableView.getItems().clear();
+         listarProducto = FXCollections.observableArrayList(ps.findAll());
+         tableView.getItems().addAll(listarProducto);
+         txtFiltroDato.textProperty().addListener((obs, o, n) -> filtrarProductos(n));
+      } catch (Exception e) {
+         System.out.println(e.getMessage());
+      }
+   }
 
-        String idxTP = cbxTipoProducto.getSelectionModel().getSelectedItem() == null ? ""
-                : cbxTipoProducto.getSelectionModel().getSelectedItem().getKey();
-        formulario.setTipoProducto(idxTP.equals("") ? null : TipoProducto.valueOf(idxTP));
+   private void filtrarProductos(String filtro) {
+      if (filtro == null || filtro.isEmpty()) {
+         tableView.getItems().setAll(listarProducto);
+      } else {
+         String f = filtro.toLowerCase();
+         List<Producto> filtrados = listarProducto.stream()
+                 .filter(p -> p.getNombre().toLowerCase().contains(f)
+                         || String.valueOf(p.getPu()).contains(f)
+                         || String.valueOf(p.getUtilidad()).contains(f)
+                         || p.getIdMarca().getNombre().toLowerCase().contains(f)
+                         || p.getIdCategoria().getNombre().toLowerCase().contains(f))
+                 .collect(Collectors.toList());
+         tableView.getItems().setAll(filtrados);
+      }
+   }
 
-        String idxM = cbxMarca.getSelectionModel().getSelectedItem() == null ? "0"
-                : cbxMarca.getSelectionModel().getSelectedItem().getKey();
-        formulario.setIdMarca(idxM.equals("0") ? null : ms.findById(Long.parseLong(idxM)));
+   @FXML
+   public void validarFormulario() {
+      formulario = new Producto();
+      formulario.setNombre(txtNombreProducto.getText());
+      formulario.setPu(parseDoubleSafe(txtPUnit.getText()));
+      formulario.setPuold(parseDoubleSafe(txtPUnitOld.getText()));
+      formulario.setUtilidad(parseDoubleSafe(txtUtilidad.getText()));
+      formulario.setStock(parseDoubleSafe(txtStock.getText()));
+      formulario.setStockold(parseDoubleSafe(txtStockOld.getText()));
 
-        String idxC = cbxCategoria.getSelectionModel().getSelectedItem() == null ? "0"
-                : cbxCategoria.getSelectionModel().getSelectedItem().getKey();
-        formulario.setIdCategoria(idxC.equals("0") ? null : cs.findById(Long.parseLong(idxC)));
+      String idxTP = cbxTipoProducto.getSelectionModel().getSelectedItem() == null ? ""
+              : cbxTipoProducto.getSelectionModel().getSelectedItem().getKey();
+      formulario.setTipoProducto(idxTP.equals("") ? null : TipoProducto.valueOf(idxTP));
 
-        String idxUM = cbxUnidMedida.getSelectionModel().getSelectedItem() == null ? "0"
-                : cbxUnidMedida.getSelectionModel().getSelectedItem().getKey();
-        formulario.setIdUnidad(idxUM.equals("0") ? null : ums.findById(Long.parseLong(idxUM)));
+      String idxM = cbxMarca.getSelectionModel().getSelectedItem() == null ? "0"
+              : cbxMarca.getSelectionModel().getSelectedItem().getKey();
+      formulario.setIdMarca(idxM.equals("0") ? null : ms.findById(Long.parseLong(idxM)));
 
-        Set<ConstraintViolation<Producto>> violaciones = validator.validate(formulario);
-        List<ConstraintViolation<Producto>> violacionesOrdenadas = violaciones.stream()
-                .sorted(Comparator.comparing(v -> v.getPropertyPath().toString())).toList();
+      String idxC = cbxCategoria.getSelectionModel().getSelectedItem() == null ? "0"
+              : cbxCategoria.getSelectionModel().getSelectedItem().getKey();
+      formulario.setIdCategoria(idxC.equals("0") ? null : cs.findById(Long.parseLong(idxC)));
 
-        if (violacionesOrdenadas.isEmpty()) {
-            procesarFormulario();
+      String idxUM = cbxUnidMedida.getSelectionModel().getSelectedItem() == null ? "0"
+              : cbxUnidMedida.getSelectionModel().getSelectedItem().getKey();
+      formulario.setIdUnidad(idxUM.equals("0") ? null : ums.findById(Long.parseLong(idxUM)));
 
-        } else {
-            mostrarErroresValidacion(violacionesOrdenadas);
-        }
-    }
+      Set<ConstraintViolation<Producto>> violaciones = validator.validate(formulario);
+      List<ConstraintViolation<Producto>> violacionesOrdenadas = violaciones.stream()
+              .sorted(Comparator.comparing(v -> v.getPropertyPath().toString())).toList();
 
-    private double parseDoubleSafe(String value) {
-        if (value == null || value.trim().isEmpty()) return 0.0;
-        try { return Double.parseDouble(value.trim()); }
-        catch (NumberFormatException e) { return 0.0; }
-    }
+      if (violacionesOrdenadas.isEmpty()) {
+         procesarFormulario();
 
-    private void mostrarErroresValidacion(List<ConstraintViolation<Producto>> violaciones) {
-        limpiarError();
-        Map<String, Control> campos = new LinkedHashMap<>();
-        campos.put("nombre", txtNombreProducto);
-        campos.put("tipoProducto", cbxTipoProducto);
-        campos.put("pu", txtPUnit);
-        campos.put("puold", txtPUnitOld);
-        campos.put("utilidad", txtUtilidad);
-        campos.put("stock", txtStock);
-        campos.put("stockold", txtStockOld);
-        campos.put("idMarca", cbxMarca);
-        campos.put("idCategoria", cbxCategoria);
-        campos.put("idUnidad", cbxUnidMedida);
+      } else {
+         mostrarErroresValidacion(violacionesOrdenadas);
+      }
+   }
 
-        LinkedHashMap<String, String> erroresOrdenados = new LinkedHashMap<>();
-        final Control[] primerCtrl = {null};
-        for (String campo : campos.keySet()) {
-            violaciones.stream()
-                .filter(v -> v.getPropertyPath().toString().equals(campo))
-                .findFirst().ifPresent(v -> {
+   private double parseDoubleSafe(String value) {
+      if (value == null || value.trim().isEmpty()) return 0.0;
+      try {
+         return Double.parseDouble(value.trim());
+      } catch (NumberFormatException e) {
+         return 0.0;
+      }
+   }
+
+   private void mostrarErroresValidacion(List<ConstraintViolation<Producto>> violaciones) {
+      limpiarError();
+      Map<String, Control> campos = new LinkedHashMap<>();
+      campos.put("nombre", txtNombreProducto);
+      campos.put("tipoProducto", cbxTipoProducto);
+      campos.put("pu", txtPUnit);
+      campos.put("puold", txtPUnitOld);
+      campos.put("utilidad", txtUtilidad);
+      campos.put("stock", txtStock);
+      campos.put("stockold", txtStockOld);
+      campos.put("idMarca", cbxMarca);
+      campos.put("idCategoria", cbxCategoria);
+      campos.put("idUnidad", cbxUnidMedida);
+
+      LinkedHashMap<String, String> erroresOrdenados = new LinkedHashMap<>();
+      final Control[] primerCtrl = {null};
+      for (String campo : campos.keySet()) {
+         violaciones.stream()
+                 .filter(v -> v.getPropertyPath().toString().equals(campo))
+                 .findFirst().ifPresent(v -> {
 
                     erroresOrdenados.put(campo, v.getMessage());
 
                     Control c = campos.get(campo);
-                    if (c != null && !c.getStyleClass().contains("text-field-error")){
-                        //c.getStyleClass().add("text-field-error");
-                        if (c != null) ttc.marcarError(c, v.getMessage().trim());
+                    if (c != null && !c.getStyleClass().contains("text-field-error")) {
+                       //c.getStyleClass().add("text-field-error");
+                       if (c != null) ttc.marcarError(c, v.getMessage().trim());
                     }
                     if (primerCtrl[0] == null) primerCtrl[0] = c;
-                });
-        }
-        if (!erroresOrdenados.isEmpty()) {
-            lbnMsg.setText(erroresOrdenados.entrySet().iterator().next().getValue());
-            lbnMsg.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-            if (primerCtrl[0] != null) Platform.runLater(primerCtrl[0]::requestFocus);
-        }
-    }
+                 });
+      }
+      if (!erroresOrdenados.isEmpty()) {
+         lbnMsg.setText(erroresOrdenados.entrySet().iterator().next().getValue());
+         lbnMsg.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+         if (primerCtrl[0] != null) Platform.runLater(primerCtrl[0]::requestFocus);
+      }
+   }
 
-    private void procesarFormulario() {
-        lbnMsg.setText("Formulario válido");
-        lbnMsg.setStyle("-fx-text-fill: green; -fx-font-size: 16px;");
-        limpiarError();
-        double w = stage.getWidth() / 1.5, h = stage.getHeight() / 2;
-        if (idProductoCE > 0L) {
-            formulario.setIdProducto(idProductoCE);
-            ps.update(idProductoCE, formulario);
-            Toast.showToast(stage, "Se actualizó correctamente!!", 2000, w, h);
-        } else {
-            ps.save(formulario);
-            Toast.showToast(stage, "Se guardó correctamente!!", 2000, w, h);
-        }
-        clearForm(); listar();
-    }
+   private void procesarFormulario() {
+      lbnMsg.setText("Formulario válido");
+      lbnMsg.setStyle("-fx-text-fill: green; -fx-font-size: 16px;");
+      limpiarError();
+      double w = stage.getWidth() / 1.5, h = stage.getHeight() / 2;
+      if (idProductoCE > 0L) {
+         formulario.setIdProducto(idProductoCE);
+         ps.update(idProductoCE, formulario);
+         Toast.showToast(stage, "Se actualizó correctamente!!", 2000, w, h);
+      } else {
+         ps.save(formulario);
+         Toast.showToast(stage, "Se guardó correctamente!!", 2000, w, h);
+      }
+      clearForm();
+      listar();
+   }
 
-    public void limpiarError() {
-        List.of(txtNombreProducto,
-                        cbxTipoProducto,
-                        txtPUnit, txtPUnitOld, txtUtilidad,
-                txtStock, txtStockOld, cbxMarca, cbxCategoria, cbxUnidMedida)
-            .forEach(c -> {c.getStyleClass().remove("text-field-error");
-                ttc.limpiarCampo(c);
-            });
-    }
+   public void limpiarError() {
+      List.of(txtNombreProducto,
+                      cbxTipoProducto,
+                      txtPUnit, txtPUnitOld, txtUtilidad,
+                      txtStock, txtStockOld, cbxMarca, cbxCategoria, cbxUnidMedida)
+              .forEach(c -> {
+                 c.getStyleClass().remove("text-field-error");
+                 ttc.limpiarCampo(c);
+              });
+   }
 
-    public void clearForm() {
-        txtNombreProducto.clear();
-        cbxTipoProducto.getSelectionModel().clearSelection();
-        txtPUnit.clear(); txtPUnitOld.clear();
-        txtUtilidad.clear(); txtStock.clear(); txtStockOld.clear();
-        cbxMarca.getSelectionModel().clearSelection();
-        cbxCategoria.getSelectionModel().clearSelection();
-        cbxUnidMedida.getSelectionModel().clearSelection();
-        idProductoCE = 0L; limpiarError();
-    }
+   public void clearForm() {
+      txtNombreProducto.clear();
+      cbxTipoProducto.getSelectionModel().clearSelection();
+      txtPUnit.clear();
+      txtPUnitOld.clear();
+      txtUtilidad.clear();
+      txtStock.clear();
+      txtStockOld.clear();
+      cbxMarca.getSelectionModel().clearSelection();
+      cbxCategoria.getSelectionModel().clearSelection();
+      cbxUnidMedida.getSelectionModel().clearSelection();
+      idProductoCE = 0L;
+      limpiarError();
+   }
 
-    public void editForm(Producto producto) {
-        txtNombreProducto.setText(producto.getNombre());
+   public void editForm(Producto producto) {
+      txtNombreProducto.setText(producto.getNombre());
 
-        txtPUnit.setText(producto.getPu().toString());
-        txtPUnitOld.setText(producto.getPuold().toString());
-        txtUtilidad.setText(producto.getUtilidad().toString());
-        txtStock.setText(producto.getStock().toString());
-        txtStockOld.setText(producto.getStockold().toString());
+      txtPUnit.setText(producto.getPu().toString());
+      txtPUnitOld.setText(producto.getPuold().toString());
+      txtUtilidad.setText(producto.getUtilidad().toString());
+      txtStock.setText(producto.getStock().toString());
+      txtStockOld.setText(producto.getStockold().toString());
 
-        cbxTipoProducto.getSelectionModel().select(
-                cbxTipoProducto.getItems().stream()
-                        .filter(m -> m.getKey() == producto.getTipoProducto().name())
-                        .findFirst().orElse(null));
+      cbxTipoProducto.getSelectionModel().select(
+              cbxTipoProducto.getItems().stream()
+                      .filter(m -> m.getKey() == producto.getTipoProducto().name())
+                      .findFirst().orElse(null));
 
-        cbxMarca.getSelectionModel().select(
-            cbxMarca.getItems().stream()
-                .filter(m -> Long.parseLong(m.getKey()) == producto.getIdMarca().getIdMarca())
-                .findFirst().orElse(null));
-        cbxCategoria.getSelectionModel().select(
-            cbxCategoria.getItems().stream()
-                .filter(c -> Long.parseLong(c.getKey()) == producto.getIdCategoria().getIdCategoria())
-                .findFirst().orElse(null));
-        cbxUnidMedida.getSelectionModel().select(
-            cbxUnidMedida.getItems().stream()
-                .filter(u -> Long.parseLong(u.getKey()) == producto.getIdUnidad().getIdUnidad())
-                .findFirst().orElse(null));
-        idProductoCE = producto.getIdProducto(); limpiarError();
-    }
+      cbxMarca.getSelectionModel().select(
+              cbxMarca.getItems().stream()
+                      .filter(m -> Long.parseLong(m.getKey()) == producto.getIdMarca().getIdMarca())
+                      .findFirst().orElse(null));
+      cbxCategoria.getSelectionModel().select(
+              cbxCategoria.getItems().stream()
+                      .filter(c -> Long.parseLong(c.getKey()) == producto.getIdCategoria().getIdCategoria())
+                      .findFirst().orElse(null));
+      cbxUnidMedida.getSelectionModel().select(
+              cbxUnidMedida.getItems().stream()
+                      .filter(u -> Long.parseLong(u.getKey()) == producto.getIdUnidad().getIdUnidad())
+                      .findFirst().orElse(null));
+      idProductoCE = producto.getIdProducto();
+      limpiarError();
+   }
 }
 ```
 
@@ -2868,7 +2888,7 @@ Sigue estos 6 pasos (el mismo patrón usado para `Marca`/`Categoria`/`UnidMedida
 
    import pe.edu.upeu.sysventas.model.Cliente;
 
-   public class ClienteRepository extends AbstractJpaRepository<Cliente, String> {
+   public class ClienteRepository  {
        @Override
        protected String getId(Cliente entity) { return entity.getDniruc(); }
        @Override

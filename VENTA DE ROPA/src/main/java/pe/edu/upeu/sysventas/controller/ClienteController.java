@@ -78,7 +78,7 @@ public class ClienteController {
         };
 
         Consumer<Cliente> deleteAction = c -> {
-            clienteService.delete(c.getIdCliente());
+            clienteService.deleteById(c.getIdCliente());
             Stage stage = (Stage) miContenedor.getScene().getWindow();
             double w = stage.getWidth() / 1.5, h = stage.getHeight() / 2;
             Toast.showToast(stage, "Se eliminó correctamente!!", 2000, w, h);

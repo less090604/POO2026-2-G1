@@ -5,11 +5,12 @@ import pe.edu.upeu.sysventas.model.Cliente;
 import pe.edu.upeu.sysventas.repository.ClienteRepository;
 import pe.edu.upeu.sysventas.repository.ICrudGenericoRepository;
 import pe.edu.upeu.sysventas.service.IClienteService;
+import pe.edu.upeu.sysventas.service.impl.CrudGenericoServiceImpl;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public class ClienteServiceImpl extends CrudGenericoServiceImp<Cliente, Long> implements IClienteService {
+public class ClienteServiceImpl extends CrudGenericoServiceImpl<Cliente, Long> implements IClienteService {
 
     private final ClienteRepository clienteRepository;
 
@@ -24,5 +25,15 @@ public class ClienteServiceImpl extends CrudGenericoServiceImp<Cliente, Long> im
             clienteRepository.seedData();
         }
         return clienteRepository.findAll();
+    }
+    @Override
+    public Cliente save(Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
+
+    @Override
+    public Cliente update(Long id, Cliente cliente) {
+        cliente.setIdCliente(id);
+        return clienteRepository.save(cliente);
     }
 }
